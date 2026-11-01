@@ -46,7 +46,7 @@ static const GPIO_InitEntry_t gpio_init_table[] =
             .pull               = GPIO_PULL_UP,
             .speed              = GPIO_SPEED_HIGH,
             .output_type        = GPIO_OUTPUT_PUSH_PULL,
-            .alternate_function = 0U, /* AF0 for USART1_RX */
+            .alternate_function = 1U, /* AF1 for USART2_RX */
             .initial_state      = GPIO_LOW,
         },
     },
@@ -58,7 +58,19 @@ static const GPIO_InitEntry_t gpio_init_table[] =
             .pull               = GPIO_PULL_UP,
             .speed              = GPIO_SPEED_HIGH,
             .output_type        = GPIO_OUTPUT_PUSH_PULL,
-            .alternate_function = 0U, /* AF0 for USART1_TX */
+            .alternate_function = 1U, /* AF1 for USART2_TX */
+            .initial_state      = GPIO_LOW,
+        },
+    },
+
+    {
+        .name   = LOG_UART_TX,
+        .config = {
+            .mode               = GPIO_MODE_ALTERNATE,
+            .pull               = GPIO_PULL_UP,
+            .speed              = GPIO_SPEED_HIGH,
+            .output_type        = GPIO_OUTPUT_PUSH_PULL,
+            .alternate_function = 1U, /* AF1 for USART2_TX */
             .initial_state      = GPIO_LOW,
         },
     },
@@ -70,10 +82,15 @@ static const GPIO_InitEntry_t gpio_init_table[] =
 
 static const GPIO_HAL_Pin_t gpio_map[GPIO_COUNT] =
 {
+    #if BOOTLOADER == 1U
         [GPIO_LED] = { .port = LED_PORT, .pin = LED_PIN },      //LED_PORT and LED_PIN are defined in board.h
         [BOOTLOADER_UART_RX] = { .port = BOOTLOADER_UART_RX_PORT, .pin = BOOTLOADER_UART_RX_PIN },
         [BOOTLOADER_UART_TX] = { .port = BOOTLOADER_UART_TX_PORT, .pin = BOOTLOADER_UART_TX_PIN },
+    #else
+        [GPIO_LED] = { .port = LED_PORT, .pin = LED_PIN },      //LED_PORT and LED_PIN are defined in board.h
+        [LOG_UART_TX] = { .port = LOG_UART_TX_PORT, .pin = LOG_UART_TX_PIN },
 
+    #endif
 };
 
 #pragma USER END

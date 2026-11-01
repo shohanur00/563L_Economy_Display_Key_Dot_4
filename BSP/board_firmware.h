@@ -27,7 +27,7 @@
 #define LOG_USE_USB                  DISABLE
 #define LOG_USE_RTT                  DISABLE
 
-#define LOG_UART_INSTANCE            3U
+#define LOG_UART_INSTANCE            2U
 #define LOG_UART_BAUDRATE            115200U
 #define LOG_UART_PARITY              UART_PARITY_NONE
 #define LOG_UART_STOP_BITS           UART_STOPBITS_1
@@ -35,8 +35,8 @@
 
 #if LOG_USE_UART == ENABLE
 
-#define LOG_UART_TX_PORT             GPIOB
-#define LOG_UART_TX_PIN              9U
+#define LOG_UART_TX_PORT             GPIOA
+#define LOG_UART_TX_PIN              2U
 
 #else
 

@@ -118,36 +118,38 @@ target_sources(${PROJECT_NAME} PRIVATE
     # GPIO
     # -------------------------------------------------------------------------
 
-    Drivers/GPIO/gpio_hal.c
+    Drivers/gpio/gpio.c
+    Drivers/gpio/gpio_hal.c
 
 
     # -------------------------------------------------------------------------
     # TimeCore
     # -------------------------------------------------------------------------
 
-    Drivers/TimeCore/timecore.c
+    Drivers/timecore/timecore.c
+    Drivers/timecore/timecore_hal.c
 
 
     # -------------------------------------------------------------------------
     # System Clock
     # -------------------------------------------------------------------------
 
-    Drivers/SystemClock/systemclock.c
+    Drivers/systemclock/systemclock.c
 
 
     # -------------------------------------------------------------------------
     # UART
     # -------------------------------------------------------------------------
 
-    Drivers/UART/uart_driver.c
-    HAL/UART/uart_hal.c
+    Drivers/uart/uart_driver.c
+    HAL/uart/uart_hal.c
 
 
     # -------------------------------------------------------------------------
     # LED
     # -------------------------------------------------------------------------
 
-    Drivers/LED/led.c
+    Drivers/led/led.c
 
 
     # -------------------------------------------------------------------------
@@ -155,7 +157,13 @@ target_sources(${PROJECT_NAME} PRIVATE
     # -------------------------------------------------------------------------
 
     Libraries/containers/RingBuffer/ring_buffer.c
-    Libraries/CRC/crc.c
+    Libraries/crc/crc.c
+
+    # -------------------------------------------------------------------------
+    # Application
+    # -------------------------------------------------------------------------
+
+    App/app.c
 
 )
 
@@ -172,46 +180,46 @@ if(BOOTLOADER_VALUE EQUAL 1)
         # Bootloader Core
         # ---------------------------------------------------------------------
 
-        Bootloader/Core/bootloader_core.c
+        Bootloader/Core/bootloader.c
 
         # ---------------------------------------------------------------------
         # Bootloader Protocol
         # ---------------------------------------------------------------------
 
-        Bootloader/Protocol/bootloader_protocol.c
+        Bootloader/Protocol/bl_protocol.c
 
         # ---------------------------------------------------------------------
         # Bootloader Transport
         # ---------------------------------------------------------------------
 
-        Bootloader/Transport/bootloader_transport.c
-        Bootloader/Transport/bootloader_uart.c
+        Bootloader/Transport/bl_transport.c
+        Bootloader/Transport/uart/bootloader_uart.c
 
         # ---------------------------------------------------------------------
         # Bootloader Flash
         # ---------------------------------------------------------------------
 
-        Bootloader/Flash/bootloader_flash.c
+        Bootloader/Flash/bl_flash.c
 
         # ---------------------------------------------------------------------
         # Bootloader Application
         # ---------------------------------------------------------------------
 
-        Bootloader/App/bootloader_app.c
+        Bootloader/bootloader_app.c
 
         # ---------------------------------------------------------------------
         # Bootloader Metadata
         # ---------------------------------------------------------------------
 
-        Bootloader/Metadata/bootloader_metadata.c
+        Bootloader/metadata/bl_metadata.c
 
         # ---------------------------------------------------------------------
         # Bootloader Jump
         # ---------------------------------------------------------------------
 
-        Bootloader/Jump/bootloader_jump.c
+        Bootloader/jump/bl_jump.c
 
-    )
+    ) 
 
 else()
 
@@ -221,7 +229,18 @@ else()
         # Main Application
         # ---------------------------------------------------------------------
 
+        Firmware/firmware.c
         App/app.c
+
+
+        # -------------------------------------------------------------------------
+        # Logger
+        # -------------------------------------------------------------------------
+
+        Services/logger/core/logger.c
+        Services/logger/core/logger_hal.c
+        Services/logger/backends/uart/logger_uart.c
+
 
     )
 
@@ -291,7 +310,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Firmware
 
 )
-
+ 
 
 # =============================================================================
 # Compiler Options

@@ -104,7 +104,7 @@
 #define BOOTLOADER_USE_OTA                  DISABLE
 
 
-#define BOOTLOADER_UART_INSTANCE            1U
+#define BOOTLOADER_UART_INSTANCE            2U
 #define BOOTLOADER_UART_TX_ENABLE           ENABLE
 #define BOOTLOADER_UART_TX_INTERRUPT        DISABLE
 #define BOOTLOADER_UART_RX_ENABLE           ENABLE
@@ -114,11 +114,11 @@
 #define BOOTLOADER_UART_STOP_BITS           UART_STOPBITS_1
 
 #if BOOTLOADER_USE_UART == ENABLE
-#define BOOTLOADER_UART_TX_PORT             GPIOB
-#define BOOTLOADER_UART_TX_PIN              6U
+#define BOOTLOADER_UART_TX_PORT             GPIOA
+#define BOOTLOADER_UART_TX_PIN              2U
 
-#define BOOTLOADER_UART_RX_PORT             GPIOB
-#define BOOTLOADER_UART_RX_PIN              7U
+#define BOOTLOADER_UART_RX_PORT             GPIOA
+#define BOOTLOADER_UART_RX_PIN              3U
 
 #else
 
